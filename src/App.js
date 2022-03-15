@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Button from './components/Button.js'
+import "./css/style.css";
 
 class App extends Component {
   
