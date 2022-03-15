@@ -18,7 +18,13 @@ class App extends Component {
   }
 
   addToCurrent = (symbol) => {
-    this.setState({current: this.state.current + symbol});
+    if(["/", "-", , "+", "X"].indexOf(symbol) > -1){
+      let {previus} = this.state;
+      previus.push(this.state.current + symbol);
+      this.setState({previus});
+    }else{
+      this.setState({current: this.state.current + symbol});
+    }
   }
 
   render(){
@@ -45,11 +51,15 @@ class App extends Component {
 
     return (
       <div className="App">
+        {this.state.previus.length > 0 ?
+          <div className="floaty-last"> {this.state.previus[this.state.previus.length - 1]}</div>
+        : null}
+
         <input className="result" type="text" value={this.state.current} />
 
         {button.map((btn, i) => {
           return <Button key={i} symbol={btn.symbol} cols={btn.cols} action={(symbol)=>btn.action(symbol)} />
-        })}
+        })} 
         
       </div>
     );
