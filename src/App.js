@@ -16,6 +16,7 @@ class App extends Component {
 
   reset = () => {
     this.setState({result: '0', previous: [], nextIsReset: false});
+    this.setState({current: "0"});
   }
 
   addToCurrent = (symbol) => {
