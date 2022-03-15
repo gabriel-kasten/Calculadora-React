@@ -9,21 +9,26 @@ class App extends Component {
   
     this.state = {
       current: '0',
-      previus: []
+      previous: []
     }
   }
 
   reset = () => {
-    this.setState({result: '0'})
+    this.setState({result: '0'});
   }
 
   addToCurrent = (symbol) => {
     if(["/", "-", , "+", "X"].indexOf(symbol) > -1){
-      let {previus} = this.state;
-      previus.push(this.state.current + symbol);
-      this.setState({previus});
-    }else{
-      this.setState({current: this.state.current + symbol});
+      let {previous} = this.state;
+
+      previous.push(this.state.current + symbol);
+      this.setState({previous});
+      }else{
+        if(this.state.current === "0" && symbol !== "."){
+          this.setState({current: symbol});
+        } else {
+          this.setState({current: this.state.current + symbol});
+        }
     }
   }
 
@@ -51,8 +56,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        {this.state.previus.length > 0 ?
-          <div className="floaty-last"> {this.state.previus[this.state.previus.length - 1]}</div>
+        {this.state.previous.length > 0 ?
+          <div className="floaty-last"> {this.state.previous[this.state.previous.length - 1]}</div>
         : null}
 
         <input className="result" type="text" value={this.state.current} />
